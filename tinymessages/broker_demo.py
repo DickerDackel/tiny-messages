@@ -1,7 +1,7 @@
 from tinymessages import Broker
 from time import time, sleep
 from enum import Enum, auto
-from queue import Queue, Empty
+from queue import Queue
 from random import random
 
 
@@ -27,7 +27,7 @@ class Score:
                 else:
                     print(f'{self}: score not increased, since entity provides no points')
 
-                self.broker.queue.put((MessageType.SCORE_INCREASED, self.score))
+                self.broker.put(MessageType.SCORE_INCREASED, self.score)
 
 
 class Loot:
@@ -36,7 +36,7 @@ class Loot:
         self.points = 42
 
     def die(self):
-        self.broker.queue.put((MessageType.SOMETHING_DIED, self))
+        self.broker.put(MessageType.SOMETHING_DIED, self)
 
 
 class BigBrother:

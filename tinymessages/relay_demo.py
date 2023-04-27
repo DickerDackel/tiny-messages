@@ -35,7 +35,7 @@ class Score:
                     else:
                         print(f'{self}: score not increased, since entity provides no points')
 
-                        self.relay.queue.put((MessageType.SCORE_INCREASED, self.score))
+                        self.relay.put(MessageType.SCORE_INCREASED, self.score)
 
 
 class Loot:
@@ -44,7 +44,7 @@ class Loot:
         self.points = 42
 
     def die(self):
-        self.relay.queue.put((MessageType.SOMETHING_DIED, self))
+        self.relay.put(MessageType.SOMETHING_DIED, self)
 
     def update(self):
         ...
